@@ -14,7 +14,6 @@ public class Solution
 
     bool dp(string text, string pattern, bool?[,] memo, int i, int j)
     {
-        Console.WriteLine($"line {i},{j}");
         if (memo[i, j].HasValue)
         {
             Console.WriteLine($"cached memo {i},{j}:{memo[i, j]}");
