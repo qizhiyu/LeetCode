@@ -13,6 +13,8 @@ namespace NaiveRegex
             {
                 throw new Exception("IsMatch not working");
             }
+
+            Console.Write("Done");
         }
     }
 }
