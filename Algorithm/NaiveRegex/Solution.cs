@@ -2,27 +2,26 @@ using System;
 
 public class Solution
 {
-    const char Wild = '.';
-    const char Any = '*';
+    const char WildChar = '.';
+    const char AnyCount = '*';
 
-    public bool IsMatch(string s, string p)
+    public bool IsMatch(string text, string pattern)
     {
-        if (p.Length == 0) return s.Length == 0;
+        if (pattern.Length == 0) return text.Length == 0;
 
-        var memo = new bool?[p.Length + 1, s.Length + 1];
-        //p.Length+1][s.Length+1]{} ;
+        var memo = new bool?[pattern.Length + 1, text.Length + 1];
 
-        var firstMatch = s.Length > 0 && (p[0] == s[0] || p[0] == Wild);
+        var firstMatch = text.Length > 0 && (pattern[0] == text[0] || pattern[0] == WildChar);
 
-        if (p.Length >= 2 && p[1] == Any)
+        if (pattern.Length >= 2 && pattern[1] == AnyCount)
         {
-            return IsMatch(s, p.Substring(2)) || (firstMatch && IsMatch(s.Substring(1), p));
+            return IsMatch(text, pattern.Substring(2)) || (firstMatch && IsMatch(text.Substring(1), pattern));
         }
 
-        return firstMatch && IsMatch(s.Substring(1), p.Substring(1));
+        return firstMatch && IsMatch(text.Substring(1), pattern.Substring(1));
     }
 
-    bool dp(string s, string p, bool?[,] memo, int i, int j)
+    bool dp(string text, string pattern, bool?[,] memo, int i, int j)
     {
         if (memo[i, j].HasValue) return memo[i, j].Value;
 
