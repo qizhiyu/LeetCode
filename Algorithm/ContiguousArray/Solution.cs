@@ -15,7 +15,6 @@ public class Solution
 
         var result = 0;
 
-        // var maxs = new int[nums.Length];
         for (var i = 0; i < numbers.Length; i++)
         {
             var c = new int[2];
@@ -39,6 +38,7 @@ public class Solution
                 }
 
             }
+            Console.WriteLine($"{i}:{length}");
             result = Math.Max(result, length);
 
         }
