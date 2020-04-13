@@ -17,6 +17,9 @@ public class Solution
 
         for (var i = 0; i < numbers.Length; i++)
         {
+            //result is best possible
+            if (i + result >= numbers.Length) break;
+            
             var c = new int[2];
 
             var length = 0;
@@ -40,7 +43,7 @@ public class Solution
             }
             Console.WriteLine($"{i}:{length}");
             result = Math.Max(result, length);
-
+            if (length >= 2 * max) break;
         }
 
         return result;

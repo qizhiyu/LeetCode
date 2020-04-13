@@ -14,7 +14,7 @@ namespace ContiguousArray
             //     throw new ApplicationException("Incorrect");
             // }
             var watch = Stopwatch.StartNew();
-            int[] v = CreateArray(1000);
+            int[] v = CreateArray(10000);
 
             Console.WriteLine($"CreateArray in {watch.ElapsedMilliseconds}ms");
             var result = s.FindMaxLength(v);
