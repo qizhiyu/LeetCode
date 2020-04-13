@@ -10,6 +10,8 @@ namespace NaiveRegex
 
             if (s.IsMatch("ab", ".*") != true ||
                 s.IsMatch("ab", "s*.*b*b") != true ||
+                s.IsMatch("abab", "s*.*b*ab") != true ||
+                s.IsMatch("abbab", "abs*.*b*ab") != true ||
                 s.IsMatch("mississippi", "mis*is*p*.") != false)
             {
                 throw new Exception("IsMatch not working");

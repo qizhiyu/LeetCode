@@ -14,12 +14,13 @@ public class Solution
 
     bool dp(string text, string pattern, bool?[,] memo, int i, int j)
     {
+        Console.WriteLine($"line {i},{j}");
         if (memo[i, j].HasValue)
         {
-            Console.WriteLine($"memo {i},{j}:{memo[i, j]}");
+            Console.WriteLine($"cached memo {i},{j}:{memo[i, j]}");
             return memo[i, j].Value;
         }
-        
+
         bool result;
 
         if (pattern.Length == j)
