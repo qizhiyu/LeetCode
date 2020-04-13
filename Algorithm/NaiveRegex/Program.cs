@@ -9,6 +9,7 @@ namespace NaiveRegex
             var s = new Solution();
 
             if (s.IsMatch("ab", ".*") != true ||
+                s.IsMatch("ab", "s*.*b*b") != true ||
                 s.IsMatch("mississippi", "mis*is*p*.") != false)
             {
                 throw new Exception("IsMatch not working");

@@ -7,24 +7,41 @@ public class Solution
 
     public bool IsMatch(string text, string pattern)
     {
-        if (pattern.Length == 0) return text.Length == 0;
+        var memo = new bool?[text.Length + 1, pattern.Length + 1];
 
-        var memo = new bool?[pattern.Length + 1, text.Length + 1];
-
-        var firstMatch = text.Length > 0 && (pattern[0] == text[0] || pattern[0] == WildChar);
-
-        if (pattern.Length >= 2 && pattern[1] == AnyCount)
-        {
-            return IsMatch(text, pattern.Substring(2)) || (firstMatch && IsMatch(text.Substring(1), pattern));
-        }
-
-        return firstMatch && IsMatch(text.Substring(1), pattern.Substring(1));
+        return dp(text, pattern, memo, 0, 0);
     }
 
     bool dp(string text, string pattern, bool?[,] memo, int i, int j)
     {
-        if (memo[i, j].HasValue) return memo[i, j].Value;
+        if (memo[i, j].HasValue)
+        {
+            Console.WriteLine($"memo {i},{j}:{memo[i, j]}");
+            return memo[i, j].Value;
+        }
+        
+        bool result;
 
-        return false;
+        if (pattern.Length == j)
+        {
+            result = text.Length == i;
+            memo[i, j] = result;
+            return result;
+        }
+
+        var firstMatch = text.Length > i && (pattern[j] == text[i] || pattern[j] == WildChar);
+
+        if (pattern.Length >= j + 2 && pattern[j + 1] == AnyCount)
+        {
+            result = dp(text, pattern, memo, i, j + 2)
+                || (firstMatch && dp(text, pattern, memo, i + 1, j));
+        }
+        else
+        {
+            result = firstMatch && dp(text, pattern, memo, i + 1, j + 1);
+        }
+
+        memo[i, j] = result;
+        return result;
     }
 }
