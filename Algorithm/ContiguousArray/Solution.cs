@@ -7,9 +7,32 @@ using System.Linq;
 ///</Summary>
 public class Solution
 {
+    /// see 523. Continuous Subarray Sum
+    public int FindMaxLength2(int[] numbers)
+    {
+        var memo = new Dictionary<int, int>(numbers.Length + 1);
+        memo[0] = -1;
+
+        var result = 0;
+        var sum = 0;
+        for (var i = 0; i < numbers.Length; i++)
+        {
+            sum += numbers[i] == 0 ? -1 : 1;
+            if (memo.ContainsKey(sum))
+            {
+                result = Math.Max(result, i - memo[sum]);
+            }
+            else
+            {
+                memo[sum] = i;
+            }
+        }
+
+        return result;
+    }
     public int FindMaxLength(int[] numbers)
     {
-        var memo = new int?[numbers.Length+1];
+        var memo = new int?[numbers.Length + 1];
 
         if (numbers.Length < 2) return 0;
         var zero = numbers.Count(x => x == 0);
@@ -21,7 +44,7 @@ public class Solution
 
         for (var i = 0; i < numbers.Length; i++)
         {
-            if(memo[i].HasValue) continue;
+            if (memo[i].HasValue) continue;
             //result is best possible
             if (i + result >= numbers.Length) break;
 
@@ -48,7 +71,7 @@ public class Solution
 
             }
 
-            Console.WriteLine($"{i}:{length}");
+            //Console.WriteLine($"{i}:{length}");
 
             for (var x = 0; x < found.Count; x++)
             {
