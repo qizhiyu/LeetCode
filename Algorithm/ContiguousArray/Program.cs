@@ -7,18 +7,26 @@ namespace ContiguousArray
     {
         static void Main(string[] args)
         {
-            var s = new Solution();
-            // if (s.FindMaxLength(new[] { 0, 1, 0, 1, 1, 0, 1 }) != 6
-            //     || s.FindMaxLength(new[] { 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0 }) != 6)
-            // {
-            //     throw new ApplicationException("Incorrect");
-            // }
-            var watch = Stopwatch.StartNew();
-            int[] v = CreateArray(10000);
+            var data1 = new[] { 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1 };
 
-            Console.WriteLine($"CreateArray in {watch.ElapsedMilliseconds}ms");
+            var s = new Solution();
+            if (
+                 // s.FindMaxLength(new[] { 0, 1, 0, 1, 1, 0, 1 }) != 6
+                 // || s.FindMaxLength(new[] { 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0 }) != 6
+                 // ||
+                 s.FindMaxLength(data1) != 30)
+            {
+                throw new ApplicationException("Incorrect");
+            }
+            int[] v = CreateArray(50000);
+
+            var watch = Stopwatch.StartNew();
+            var result2 = s.FindMaxLength2(v);
+            Console.WriteLine($"FindMaxLength2 in {watch.ElapsedMilliseconds}ms! {result2}");
+            watch.Restart();
             var result = s.FindMaxLength(v);
             watch.Stop();
+
             Console.WriteLine($"Done in {watch.ElapsedMilliseconds}ms! {result}");
         }
 
