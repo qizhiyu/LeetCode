@@ -31,12 +31,12 @@ public class Solution
                 map[i][j] = ++id;
 
                 //update all neighbors 
-                Mark(map, grid, i, j, id);
+                MarkAllNeighbors(map, grid, i, j, id);
 
             }
         }
 
-        return id - 1;
+        return id;
     }
 
     void Mark(List<List<int>> map, char[][] grid, int i, int j, int id)
